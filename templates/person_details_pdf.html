@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Details</title>
+    <style>
+        /* Add any necessary CSS styles for the PDF */
+    </style>
+</head>
+<body>
+    <h1>Person Details</h1>
+    <p>ID Number: {{ person.id_number }}</p>
+    <p>Full Name: {{ person.full_name }}</p>
+    <p>Date of Birth: {{ person.date_of_birth }}</p>
+    <p>Place of Birth: {{ person.place_of_birth }}</p>
+    <p>Gender: {{ person.gender }}</p>
+    <p>Date of Issue: {{ person.date_of_issue }}</p>
+    <p>Expiry Date: {{ person.expiry_date }}</p>
+    <p>Nationality: {{ person.nationality }}</p>
+
+    {% if person.thumbprint %}
+        <p>Thumbprint: Available</p>
+    {% else %}
+        <p>Thumbprint: Not Available</p>
+    {% endif %}
+
+    {% if person.parent_or_guardian %}
+        <p>Parent/Guardian: {{ person.parent_or_guardian }}</p>
+    {% else %}
+        <p>Parent/Guardian: Not Available</p>
+    {% endif %}
+
+    {% if person.profile_picture %}
+        <img src="{{ person.profile_picture.url }}" alt="{{ person.full_name }}">
+    {% else %}
+        <p>No Profile Picture</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #000;
+        color: #00FF00;
+        border: 2px solid #00FF00;
+        border-radius: 10px;
+    }
+    th, td {
+        border: 1px solid #00FF00;
+        padding: 12px;
+        text-align: left;
+    }
+    th {
+        background-color: #002f00;
+        color: #00FF00;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #001f00;
+    }
+    .profile-picture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%; /* Makes the image round */
+        border: 1px solid #00FF00;
+        object-fit: cover; /* Ensures the image covers the area */
+    }
+    .actions a {
+        color: #00FF00;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+    .actions a:hover {
+        color: #0056b3;
+    }
+</style>
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid dashboard-default-sec">
+        <div class="row">
+            <div class="col-xl-12 recent-order-sec">
+                <div class="card">
+                  <div class="card-body"> 
+                   
+                    <div class="dt-ext table-responsive"> 
+
+                      
+                        <h5>Information Database </h5>
+                        <div id="custom-button_filter">
+                            <a href="{% url 'add_person' %}">Add Person</a>
+                         </div>
+                         <table class="display dataTable" id="custom-button" role="grid" aria-describedby="custom-button_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="custom-button" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 193.613px;">ID Number</th>
+                                        <th>Full Name</th>
+                                        <th>Date of Birth</th>
+                                        <th>Place of Birth</th>
+                                        <th>Profile Picture</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for person in people %}
+                                    <tr>
+                                        <td>{{ person.id_number }}</td>
+                                        <td>{{ person.full_name }}</td>
+                                        <td>{{ person.date_of_birth }}</td>
+                                        <td>{{ person.place_of_birth }}</td>
+                                        <td>
+                                            {% if person.profile_picture %}
+                                                <img src="{{ person.profile_picture.url }}" alt="{{ person.full_name }}" class="profile-picture">
+                                            {% else %}
+                                                No Image
+                                            {% endif %}
+                                        </td>
+                                        <td class="actions">
+                                            <a href="{% url 'view_person' person.pk %}" title="View">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a href="{% url 'update_person' person.pk %}" title="Update">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a href="{% url 'delete_person' person.pk %}" title="Delete" onclick="return confirm('Are you sure you want to delete this person?');">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                            <a href="{% url 'print_person' person.pk %}" target="_blank" title="Print">
+                                                <i class="bi bi-printer"></i>
+                                            </a>
+                                        </td>
+                                        
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="6">No people found.</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                       </table>
+                    </div>
+                    </div>   
+                </div>
+              </div>        
+           </div>  
+       </div>
+   </div>   
+</div>
+{%  endblock  %}
+

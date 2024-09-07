@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person ID Card</title>
+   
+</head>
+<body>
+
+        
+            <h1>Person Details</h1>
+           
+                    <img src="{{ profile_picture_url }}" alt="Profile Picture" >
+                    
+                   
+                    <p><strong>ID Number:</strong> {{ person.id_number }}</p>
+                    <p><strong>Full Name:</strong> {{ person.full_name }}</p>
+                    <p><strong>Date of Birth:</strong> {{ person.date_of_birth }}</p>
+                    <p><strong>Place of Birth:</strong> {{ person.place_of_birth }}</p>
+                    <p><strong>Gender:</strong> {{ person.gender }}</p>
+                    
+              
+                    <p><strong>Date of Issue:</strong> {{ person.date_of_issue }}</p>
+                    <p><strong>Expiry Date:</strong> {{ person.expiry_date }}</p>
+                    <p><strong>Nationality:</strong> {{ person.nationality }}</p>
+                    <p><strong>Parent/Guardian:</strong> {{ person.parent_or_guardian }}</p>
+                    {% if thumbprint_url %}
+                      <img src="{{ thumbprint_url }}" alt="Thumbprint" class="thumbprint">
+                    {% endif %}
+                </div>
+
+       
+    </div>
+</body>
+</html>

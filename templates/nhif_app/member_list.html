@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NHIF Members</title>
+</head>
+<body>
+    <h1>NHIF Members</h1>
+    <ul>
+        {% for member in members %}
+            <li><a href="{% url 'member_detail' member.id %}">{{ member.full_name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

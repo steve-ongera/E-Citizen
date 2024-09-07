@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Collections</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Monthly Collections</h1>
+
+    <canvas id="monthlyCollectionsChart" width="600" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById('monthlyCollectionsChart').getContext('2d');
+        var monthlyCollectionsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ month_names|safe }},
+                datasets: [{
+                    label: 'Total Collected',
+                    data: {{ amounts_collected|safe }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>

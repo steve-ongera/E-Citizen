@@ -1,0 +1,103 @@
+ {% extends "base.html" %}
+ {% block content %}
+{% comment %}<!-- templates/search_person.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Person</title>
+</head>
+<body>
+    <h1>Search for a Person</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+    {% if person %}
+        <h2>Person Details</h2>
+        <p><strong>ID Number:</strong> {{ person.id_number }}</p>
+        <p><strong>Full Name:</strong> {{ person.full_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ person.date_of_birth }}</p>
+        <p><strong>Place of Birth:</strong> {{ person.place_of_birth }}</p>
+        {% if person.profile_picture %}
+            <p><img src="{{ person.profile_picture.url }}" alt="Profile Picture"></p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
+
+{% endcomment %}
+
+
+
+<!-- Container-fluid starts-->
+<div class="page-body">
+<div class="container-fluid search-page">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header pb-0">
+            <form method="post" class="search-form">
+                {% csrf_token %}
+                    <div class="form-group m-0">
+                        <label class="sr-only">Email</label>
+                    </div>
+                    <div class="form-group mb-0">
+                        <div class="input-group"><span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input class="form-control-plaintext" type="text" id="id_number" name="id_number" required placeholder="Kindly enter the identification number ...." >
+                        </div>
+                    </div>
+            </form>
+          </div>
+          <div class="card-body">
+            
+            <div class="tab-content" id="top-tabContent">
+                <div class="search-links tab-pane fade show active" id="all-links" role="tabpanel" aria-labelledby="all-link">
+                    <div class="row">
+                        <div class="col-xl-6 box-col-6">
+
+                            {% if messages %}
+                                {% for message in messages %}
+                                  <div class="alert alert-{{ message.tags }} warning alert-dismissible fade show" role="alert">
+                                      <strong>{{ message }}</strong>
+                                      
+                                  </div>
+                                  {% endfor %}
+                            {% endif %}
+
+                          {% if person %}
+                          <p class="pb-4">About 6,000 results (0.60 seconds)</p>
+                          <div class="info-block">
+                            <h6> {{ person.id_number }}</h6>
+                            <h6> {{ person.full_name }}.</h6>
+                            <h6>{{ person.date_of_birth }}</h6>
+                            <h6>{{ person.place_of_birth }}.</h6>  
+                          </div>
+                          {% endif %}
+                          </div>
+                      </div>
+                      <div class="col-xl-6 box-col-6">
+
+                        {% if person %}
+                          <p class="pb-4">About 6,000 results (0.60 seconds)</p>
+                          <div class="info-block">
+                            <h6> {{ person.id_number }}</h6>
+                            <h6> {{ person.full_name }}.</h6>
+                            <h6>{{ person.date_of_birth }}</h6>
+                            <h6>{{ person.place_of_birth }}.</h6>  
+                          </div>
+                          {% endif %}
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+            </div>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->
+</div>
+{% endblock %}

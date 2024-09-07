@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.full_name }}</h1>
+    <a href="{% url 'update_profile' %}">Update Profile</a>
+    <h2>Payments</h2>
+    <ul>
+        {% for payment in payments %}
+            <li>{{ payment.amount }} - {{ payment.payment_date }} - {{ payment.status }}</li>
+        {% empty %}
+            <li>No payments found.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'verify_code' %}">Verify Payment Code</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

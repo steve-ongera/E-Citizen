@@ -1,0 +1,29 @@
+<!-- search_payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Payment by Secret Code</title>
+</head>
+<body>
+    <h1>Search Payment by Secret Code</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% elif payment %}
+        <h2>Payment Details</h2>
+        <p><strong>User:</strong> {{ payment.user }}</p>
+        <p><strong>Amount:</strong> {{ payment.amount }}</p>
+        <p><strong>Payment Date:</strong> {{ payment.payment_date }}</p>
+        <p><strong>Tax Month:</strong> {{ payment.month }}</p>
+        <p><strong>Status:</strong> {{ payment.status }}</p>
+        <p><strong>Secret Code:</strong> {{ payment.secret_code }}</p>
+        <p><strong>Code Expiration:</strong> {{ payment.code_expiration }}</p>
+    {% endif %}
+</body>
+</html>

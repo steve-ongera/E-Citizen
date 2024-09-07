@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marriage License Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+        .details {
+            max-width: 600px;
+            margin: auto;
+        }
+        .details label {
+            font-weight: bold;
+        }
+        .btn {
+            text-decoration: none;
+            padding: 8px 16px;
+            margin: 4px 2px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'list_marriage_license_records' %}">Marriage Licenses</a>
+    </div>
+    <div class="content">
+        <h1>Marriage License Details</h1>
+        <div class="details">
+            <p><label>License Number:</label> {{ record.license_number }}</p>
+            <p><label>Applicant 1:</label> {{ record.applicant1 }}</p>
+            <p><label>Applicant 2:</label> {{ record.applicant2 }}</p>
+            <p><label>Application Date:</label> {{ record.application_date }}</p>
+            <p><label>Issued By:</label> {{ record.issued_by }}</p>
+            <p>
+                <label>Certificate PDF:</label>
+                {% if record.cert_pdf %}
+                    <a href="{{ record.cert_pdf.url }}" target="_blank">View Certificate</a>
+                {% else %}
+                    No PDF
+                {% endif %}
+            </p>
+            <p>
+                <a href="{% url 'update_marriage_license' record.pk %}" class="btn">Update</a>
+                <form action="{% url 'delete_marriage_license' record.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn" style="background-color: #f44336;">Delete</button>
+                </form>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

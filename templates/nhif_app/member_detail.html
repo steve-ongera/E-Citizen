@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ member.full_name }} - Details</title>
+</head>
+<body>
+    <h1>{{ member.full_name }}</h1>
+    <p>ID: {{ member.identification_number }}</p>
+    <p>Registration Fee Paid: {{ member.registration_fee_paid }}</p>
+    
+    <h2>Monthly Payments</h2>
+    <ul>
+        {% for payment in payments %}
+            <li>{{ payment.month.name }}: {{ payment.amount }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add Payment</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="month">Month:</label>
+        <input type="text" id="month" name="month">
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount">
+        <button type="submit">Add Payment</button>
+    </form>
+</body>
+</html>

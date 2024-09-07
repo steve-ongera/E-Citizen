@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  
+   
+    .container {
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #001f00;
+        border: 2px solid #00FF00;
+        border-radius: 10px;
+    }
+    h1 , h2 {
+        color: #00FF00;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    p {
+        color: #00FF00;
+       
+    }
+
+    .profile-picture {
+        display: block;
+        margin: 20px auto;
+        border-radius: 8px;
+        max-width: 200px;
+        height: auto;
+        border: 2px solid #00FF00;
+    }
+    .info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0;
+    }
+    .info p {
+        margin: 12px 0;
+        font-size: 1.1em;
+        color:white;
+    }
+    .info strong {
+        display: inline-block;
+        width: 150px;
+        color: #00FF00;
+    }
+    .actions {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .actions a {
+        background-color: #004085;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 5px;
+        display: inline-block;
+    }
+    .actions a:hover {
+        background-color: #0056b3;
+    }
+    .data-section {
+        border: 1px solid #00FF00;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    .data-section h2 {
+        color: #00FF00;
+        border-bottom: 1px solid #00FF00;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid dashboard-default-sec">
+        <div class="row">
+            <div class="col-xl-12 recent-order-sec">
+                <div class="card">
+                  <div class="card-body"> 
+
+   
+                    <div class="container">
+                        <h1>{{ person.username }}'s Details</h1>
+                        <div class="info">
+                            <div class="data-section">
+                                <h2>Basic Information</h2>
+                                <p><strong>ID Number:</strong> {{ person.id_number }}</p>
+                                <p><strong>Username:</strong> {{ person.username }}</p>
+                                <p><strong>Full Name:</strong> {{ person.full_name }}</p>
+                                <p><strong>First Name:</strong> {{ person.first_name }}</p>
+                                <p><strong>Middle Name:</strong> {{ person.middle_name }}</p>
+                                <p><strong>Last Name:</strong> {{ person.last_name }}</p>
+                                <p><strong>Email:</strong> {{ person.email }}</p>
+                                <p><strong>Phone:</strong> {{ person.phone }}</p>
+                                <p><strong>Security Number:</strong> {{ person.social_security_number }}</p>
+                                <p><strong>Date of Birth:</strong> {{ person.date_of_birth }}</p>
+                                <p><strong>Place of Birth:</strong> {{ person.place_of_birth }}</p>
+                                <p><strong>Gender:</strong> {{ person.gender }}</p>
+                                <p><strong>Date of Issue:</strong> {{ person.date_of_issue }}</p>
+                                <p><strong>Expiry Date:</strong> {{ person.expiry_date }}</p>
+                                <p><strong>Nationality:</strong> {{ person.nationality }}</p>
+                            </div>
+                            <div class="data-section">
+                                <h2>Additional Information</h2>
+                                {% if person.thumbprint %}
+                                    <p><strong>Thumbprint:</strong> <img src="{{ person.thumbprint.url }}" alt="Thumbprint" class="profile-picture"></p>
+                                {% endif %}
+                                {% if person.parent_or_guardian %}
+                                    <p><strong>Parent/Guardian:</strong> {{ person.parent_or_guardian }}</p>
+                                {% endif %}
+                                <p>
+                                    <strong>Profile Picture:</strong><br>
+                                    {% if person.profile_picture %}
+                                        <img src="{{ person.profile_picture.url }}" alt="{{ person.full_name }}" class="profile-picture">
+                                    {% else %}
+                                        No Image
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <a href="{% url 'update_person' person.pk %}">Update</a>
+                            <a href="{% url 'delete_person' person.pk %}">Delete</a>
+                            <a href="#">Print</a>
+
+
+                        
+                        </div>
+                     </div>
+
+                 </div>
+             </diV>    
+         </div>
+        </div>
+  </div>
+</div>   
+{% endblock %}

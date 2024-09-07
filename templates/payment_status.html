@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Status</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .tick {
+            color: green;
+            font-size: 20px;
+        }
+        .cross {
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Payment Status Record</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                {% for month in months %}
+                    <th>{{ month.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    {% for month in months %}
+                        <td>
+                            {% if payment_status[user.username][month.name] %}
+                                <span class="tick">&#10004;</span> <!-- Tick -->
+                            {% else %}
+                                <span class="cross">&#10008;</span> <!-- Cross -->
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

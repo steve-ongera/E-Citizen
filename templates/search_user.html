@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search User</title>
+</head>
+<body>
+    <h1>Search for a User</h1>
+
+    <form method="get" action="{% url 'search_user' %}">
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if user %}
+        <h2>User Details</h2>
+        <p>Username: {{ user.username }}</p>
+        <!-- Display other user details here -->
+
+        <h2>Payment History</h2>
+        <ul>
+            {% for payment in payments %}
+                <li>{{ payment.date }}: KSh {{ payment.amount }}</li>
+            {% empty %}
+                <li>No payments found for this user.</li>
+            {% endfor %}
+        </ul>
+    {% elif form.is_valid %}
+        <p>User not found.</p>
+    {% endif %}
+</body>
+</html>
